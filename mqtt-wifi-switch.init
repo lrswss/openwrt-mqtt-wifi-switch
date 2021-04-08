@@ -1,0 +1,13 @@
+#!/bin/sh /etc/rc.common
+USE_PROCD=1
+START=95
+STOP=01
+start_service() {
+    procd_open_instance
+    procd_set_param command /bin/sh "/bin/mqtt-wifi-switch.sh"
+    procd_close_instance
+}
+
+stop_service() {
+    rm -f /var/run/mqtt-wifi-switch.lock
+}
